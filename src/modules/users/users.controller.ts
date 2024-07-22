@@ -14,13 +14,10 @@ export class UsersController {
   constructor(private readonly userService: UserService) {}
 
   @Post('register')
-  // async registerUser(@Body() createUserDto: CreateUserDto): Promise<User> {
-  //   const { name, email, password } = createUserDto;
-  //   return this.userService.registerUser(name, email, password);
-  // }
-  async registerUser() {
-    return 2;
-  }
+   async registerUser(@Body() createUserDto: CreateUserDto): Promise<User> {
+     const { name, email, password } = createUserDto;
+     return this.userService.registerUser(name, email, password);
+   }
 
   @Get('test')
   getTest() {
