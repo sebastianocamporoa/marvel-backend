@@ -1,7 +1,9 @@
+// src/modules/marvel/marvel.service.ts
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { AxiosResponse } from 'axios';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class MarvelService {
@@ -11,6 +13,8 @@ export class MarvelService {
   constructor(private httpService: HttpService) {}
 
   getComics(): Observable<AxiosResponse<any>> {
-    return this.httpService.get(`${this.apiUrl}?apikey=${this.apiKey}`);
+    return this.httpService.get(`${this.apiUrl}?apikey=${this.apiKey}`).pipe(
+      map(response => response.data)
+    );
   }
 }

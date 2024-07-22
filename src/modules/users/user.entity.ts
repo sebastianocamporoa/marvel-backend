@@ -1,7 +1,14 @@
+// src/modules/users/user.entity.ts
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+
+@Entity()
 export class User {
-    constructor(
-      public id: string,
-      public name: string,
-      public email: string,
-    ) {}
-  }
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column()
+  name: string;
+
+  @Column()
+  email: string;
+}

@@ -1,18 +1,19 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './modules/users/users.module';
 import { MarvelModule } from './modules/marvel/marvel.module';
-import { MongooseModule } from '@nestjs/mongoose';
-const password = encodeURIComponent("Ecorzo69");
+import { User } from './modules/users/user.entity';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://0.0.0.0:27017'),
-    UserModule, 
-    MarvelModule
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      url: 'mysql://root:XNgnShRvvBmqwWiKFngMjOFDsqovgISW@viaduct.proxy.rlwy.net:25864/railway',
+      entities: [User],
+      synchronize: true,
+    }),
+    UserModule,
+    MarvelModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
