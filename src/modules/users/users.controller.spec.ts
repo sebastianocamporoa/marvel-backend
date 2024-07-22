@@ -1,4 +1,3 @@
-// src/modules/users/user.controller.spec.ts
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserController } from './users.controller';
 import { UserService } from './users.service';

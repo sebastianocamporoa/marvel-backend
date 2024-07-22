@@ -8,7 +8,7 @@ import { User } from './modules/users/user.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      url: 'mysql://root:XNgnShRvvBmqwWiKFngMjOFDsqovgISW@viaduct.proxy.rlwy.net:25864/railway',
+      url: 'mysql://root:BDbdvRxnVLXDbYtWJLHXwzkWwmPPEMJu@:/railway',
       entities: [User],
       synchronize: true,
     }),

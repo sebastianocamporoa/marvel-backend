@@ -1,4 +1,3 @@
-// src/modules/marvel/marvel.module.ts
 import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
 import { MarvelService } from './marvel.service';
