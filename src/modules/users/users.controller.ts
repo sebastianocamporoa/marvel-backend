@@ -1,3 +1,10 @@
+// Define el DTO para crear un usuario
+export class CreateUserDto {
+  name: string;
+  email: string;
+  password: string;
+}
+
 import { Controller, Post, Body } from '@nestjs/common';
 import { UserService } from './users.service';
 import { User } from './user.entity';
@@ -11,11 +18,4 @@ export class UsersController {
     const { name, email, password } = createUserDto;
     return this.userService.registerUser(name, email, password);
   }
-}
-
-// Define el DTO para crear un usuario
-export class CreateUserDto {
-  name: string;
-  email: string;
-  password: string;
 }
