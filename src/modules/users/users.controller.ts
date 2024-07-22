@@ -1,12 +1,21 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { UserService } from './users.service';
+import { User } from './user.entity';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UserService) {}
+  constructor(private readonly userService: UserService) {}
 
   @Post('register')
-  async register(@Body() body: { name: string; email: string; password: string }) {
-    return await this.usersService.registerUser(body.name, body.email, body.password);
+  async registerUser(@Body() createUserDto: CreateUserDto): Promise<User> {
+    const { name, email, password } = createUserDto;
+    return this.userService.registerUser(name, email, password);
   }
+}
+
+// Define el DTO para crear un usuario
+export class CreateUserDto {
+  name: string;
+  email: string;
+  password: string;
 }
