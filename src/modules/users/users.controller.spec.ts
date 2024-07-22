@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserController } from './users.controller';
+import { UsersController } from './users.controller';
 import { UserService } from './users.service';
 
 describe('UserController', () => {
-  let controller: UserController;
+  let controller: UsersController;
   let service: UserService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [UserController],
+      controllers: [UsersController],
       providers: [
         {
           provide: UserService,
@@ -19,7 +19,7 @@ describe('UserController', () => {
       ],
     }).compile();
 
-    controller = module.get<UserController>(UserController);
+    controller = module.get<UsersController>(UsersController);
     service = module.get<UserService>(UserService);
   });
 
@@ -28,9 +28,9 @@ describe('UserController', () => {
   });
 
   it('should register a user', async () => {
-    const user = { id: '1', name: 'Test', email: 'test@example.com' };
+    const user = { id: '1', name: 'Test', email: 'test@example.com', password: 'a' };
     jest.spyOn(service, 'registerUser').mockResolvedValue(user);
-    const result = await controller.register({ name: 'Test', email: 'test@example.com' });
+    const result = await controller.register({ name: 'Test', email: 'test@example.com', password:'a' });
     expect(result).toEqual(user);
     expect(service.registerUser).toHaveBeenCalledWith('Test', 'test@example.com');
   });
