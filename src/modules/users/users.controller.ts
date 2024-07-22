@@ -5,7 +5,7 @@ export class CreateUserDto {
   password: string;
 }
 
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { UserService } from './users.service';
 import { User } from './user.entity';
 
@@ -17,5 +17,10 @@ export class UsersController {
   async registerUser(@Body() createUserDto: CreateUserDto): Promise<User> {
     const { name, email, password } = createUserDto;
     return this.userService.registerUser(name, email, password);
+  }
+
+  @Get('test')
+  getTest() {
+    return 1;
   }
 }
