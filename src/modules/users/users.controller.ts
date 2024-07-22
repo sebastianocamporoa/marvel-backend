@@ -11,16 +11,16 @@ import { User } from './user.entity';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   @Post('register')
-   async registerUser(@Body() createUserDto: CreateUserDto): Promise<User> {
-     const { name, email, password } = createUserDto;
-     return this.userService.registerUser(name, email, password);
-   }
+  async registerUser(@Body() createUserDto: CreateUserDto): Promise<User> {
+    const { name, email, password } = createUserDto;
+    return this.userService.registerUser(name, email, password);
+  }
 
-  @Get('test')
-  getTest() {
-    return 1;
+  @Post('login')
+  async login(@Body() body: { email: string; password: string }) {
+    return this.userService.loginUser(body.email, body.password);
   }
 }
