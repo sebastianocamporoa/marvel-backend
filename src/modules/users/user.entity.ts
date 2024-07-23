@@ -1,13 +1,10 @@
-// src/modules/users/user.entity.ts
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Favorite } from '../favorites/favorite.entity';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-
-  @Column()
-  identification: string;
 
   @Column()
   name: string;
@@ -17,4 +14,10 @@ export class User {
 
   @Column()
   password: string;
+
+  @Column()
+  identification: string;
+
+  @OneToMany(() => Favorite, favorite => favorite.user)
+  favorites: Favorite[];
 }

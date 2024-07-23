@@ -1,26 +1,17 @@
-// Define el DTO para crear un usuario
-export class CreateUserDto {
-  name: string;
-  identification: string;
-  email: string;
-  password: string;
-}
-
-import { Controller, Post, Body, Get } from '@nestjs/common';
-import { UserService } from './users.service';
-import { User } from './user.entity';
+import { Controller, Post, Body } from '@nestjs/common';
+import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly usersService: UsersService) {}
 
   @Post('register')
   async register(@Body() body: { name: string; email: string; password: string; identification: string }) {
-    return this.userService.registerUser(body.name, body.email, body.password, body.identification);
+    return this.usersService.registerUser(body.name, body.email, body.password, body.identification);
   }
 
   @Post('login')
   async login(@Body() body: { email: string; password: string }) {
-    return this.userService.loginUser(body.email, body.password);
+    return this.usersService.loginUser(body.email, body.password);
   }
 }
