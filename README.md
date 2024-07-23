@@ -1,73 +1,107 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Marvel API Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este es un proyecto de backend desarrollado con NestJS y TypeORM para interactuar con la API de Marvel. Permite a los usuarios registrarse, iniciar sesión, ver cómics y gestionar una lista de cómics favoritos.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Características
 
-## Description
+- Registro de usuarios
+- Inicio de sesión con generación de JWT
+- Visualización de cómics desde la API de Marvel
+- Gestión de cómics favoritos por usuario (agregar y eliminar favoritos)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Tecnologías
 
-## Installation
+- NestJS
+- TypeORM
+- MySQL
+- JWT (JSON Web Token)
 
-```bash
-$ npm install
-```
+## Requisitos
 
-## Running the app
+- Node.js
+- MySQL
+- Marvel API Key
 
-```bash
-# development
-$ npm run start
+## Configuración del proyecto
 
-# watch mode
-$ npm run start:dev
+1. Clona el repositorio:
+   ```bash
+   git clone <url-del-repositorio>
+   cd marvel-backend
 
-# production mode
-$ npm run start:prod
-```
+2. Instala las dependencias:
+    ```bash
+    npm install
 
-## Test
+3. Inicia el servidor de desarrollo:
+    ```bash
+    npm run start:dev
 
-```bash
-# unit tests
-$ npm run test
+## Configuración
 
-# e2e tests
-$ npm run test:e2e
+### Variables de Entorno
 
-# test coverage
-$ npm run test:cov
-```
+En esta prueba tecnica omití el uso de un archivo `.env` con el objetivo de facilitar su revisión
 
-## Support
+## Endpoints de la API
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Registro de usuarios
 
-## Stay in touch
+- **URL:** `/users/register`
+- **Método:** `POST`
+- **Cuerpo de la solicitud:**
+  ```json
+  {
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "password": "yourpassword",
+    "identification": "123456789"
+  }
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- **Respuesta:**
+  ```json
+  {
+    "user": {
+      "id": "uuid-del-usuario",
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "identification": "123456789",
+      "password": "$2b$10$..."
+    },
+    "accessToken": "your.jwt.token",
+    "userId": "uuid-del-usuario"
+  }
+  
+  
+ ## Patrón de Diseño: Domain-Driven Design (DDD)
 
-## License
+Este proyecto sigue los principios de Domain-Driven Design (DDD) para estructurar y organizar el código. DDD es un enfoque para desarrollar software complejo al conectar la implementación a un modelo en evolución, que refleja una comprensión profunda del dominio del problema.
 
-Nest is [MIT licensed](LICENSE).
+### Principios Clave de DDD
+
+1. **Modelar el Dominio:**
+   - El núcleo del enfoque DDD es construir un modelo que represente de manera precisa y completa el dominio del problema.
+   - Este modelo se implementa utilizando objetos de dominio que encapsulan el estado y el comportamiento.
+
+2. **Lenguaje Ubicuo:**
+   - El lenguaje ubicuo es un lenguaje común compartido por el equipo de desarrollo y los expertos en dominio. Este lenguaje se refleja en el código, asegurando que todos los involucrados tengan una comprensión clara y coherente del sistema.
+
+3. **Contextos Limitados:**
+   - Los contextos limitados son subdominios o áreas del dominio más grande. Cada contexto limitado tiene su propio modelo y es responsable de una parte específica del dominio.
+
+### Componentes del Proyecto
+
+El proyecto se organiza en módulos que corresponden a contextos limitados del dominio. Cada módulo contiene varios componentes clave:
+
+1. **Entidades (Entities):**
+   - Las entidades son objetos del dominio que tienen identidad propia y una vida definida. Representan conceptos principales del dominio, como `User` y `Favorite`.
+
+2. **Repositorios (Repositories):**
+   - Los repositorios son responsables de la persistencia y recuperación de entidades. Abstraen el acceso a la base de datos y proporcionan una interfaz para interactuar con las entidades.
+
+3. **Servicios de Dominio (Domain Services):**
+   - Los servicios de dominio encapsulan la lógica de negocio que no pertenece a ninguna entidad en particular. Coordinan operaciones entre múltiples entidades y aseguran que las reglas de negocio se apliquen correctamente.
+
+4. **Controladores (Controllers):**
+   - Los controladores manejan las solicitudes HTTP, transformándolas en acciones de la aplicación al invocar los servicios de dominio. También se encargan de formatear las respuestas adecuadas.
+
