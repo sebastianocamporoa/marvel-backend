@@ -7,6 +7,9 @@ export class User {
   id: string;
 
   @Column()
+  identification: string;
+
+  @Column()
   name: string;
 
   @Column()

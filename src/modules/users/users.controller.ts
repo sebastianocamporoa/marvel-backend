@@ -1,6 +1,7 @@
 // Define el DTO para crear un usuario
 export class CreateUserDto {
   name: string;
+  identification: string;
   email: string;
   password: string;
 }
@@ -15,8 +16,8 @@ export class UsersController {
 
   @Post('register')
   async registerUser(@Body() createUserDto: CreateUserDto): Promise<User> {
-    const { name, email, password } = createUserDto;
-    return this.userService.registerUser(name, email, password);
+    const { name, email, password, identification } = createUserDto;
+    return this.userService.registerUser(name, email, password, identification);
   }
 
   @Post('login')

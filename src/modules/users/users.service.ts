@@ -13,9 +13,9 @@ export class UserService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async registerUser(name: string, email: string, password: string): Promise<User> {
+  async registerUser(name: string, email: string, password: string, identification : string): Promise<User> {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = this.userRepository.create({ name, email, password: hashedPassword });
+    const user = this.userRepository.create({ name, email, password: hashedPassword, identification });
     return this.userRepository.save(user);
   }
 
