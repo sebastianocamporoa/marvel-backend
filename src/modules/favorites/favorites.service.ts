@@ -30,4 +30,12 @@ export class FavoritesService {
     }
     return user.favorites;
   }
+
+  async removeFavorite(userId: string, comicId: string): Promise<void> {
+    const favorite = await this.favoriteRepository.findOne({ where: { user: { id: userId }, comicId } });
+    if (!favorite) {
+      throw new NotFoundException('Favorite not found');
+    }
+    await this.favoriteRepository.remove(favorite);
+  }
 }
