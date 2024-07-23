@@ -13,10 +13,13 @@ export class UserService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async registerUser(name: string, email: string, password: string, identification : string): Promise<User> {
+  async registerUser(name: string, email: string, password: string, identification: string): Promise<{ user: User, accessToken: string }> {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = this.userRepository.create({ name, email, password: hashedPassword, identification });
-    return this.userRepository.save(user);
+    const savedUser = await this.userRepository.save(user);
+    const payload = { email: savedUser.email, sub: savedUser.id };
+    const accessToken = this.jwtService.sign(payload);
+    return { user: savedUser, accessToken };
   }
 
   async loginUser(email: string, password: string): Promise<{ accessToken: string }> {
